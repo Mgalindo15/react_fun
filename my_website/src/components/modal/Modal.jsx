@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import CounterModal from '../utils/Counter';
+import CounterModal from '../counter/Counter';
 
 const Modal = () => {
     const modal = useSelector((state) => state.modal);

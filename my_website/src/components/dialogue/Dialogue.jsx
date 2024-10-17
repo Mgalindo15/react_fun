@@ -7,7 +7,7 @@ const Dialogue = () => {
   if (dialogues.length === 0) return null;
 
   return (
-    <div className=''>
+    <div>
       {dialogues.map((dialogue) => (
         <DialogueItem key={dialogue.id} dialogue={dialogue} />
       ))}

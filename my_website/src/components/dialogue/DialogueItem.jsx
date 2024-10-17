@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { closeDialogueBox } from '../../reducers/dialogue/dialogueSlice';
-import { DialogueItemPropTypes } from '../utils/propTypes';
+import { DialogueItemPropTypes } from '../../utils/propTypes';
 
 const DialogueItem = ({ dialogue }) => {
   const dispatch = useDispatch();

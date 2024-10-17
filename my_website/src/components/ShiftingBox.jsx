@@ -18,13 +18,12 @@ const ShiftingBox = () => {
         const randY = Math.random() * 100;
 
         dispatch(setPosition({ xPos: randX, yPos: randY }));
-
-        /* Increment counter before dispatch to ensure count integrity */
-        const newCounterValue = globalCounter + 1;
-
         dispatch(incrementCounter());
 
-        /* Dialogue Controller */
+        /* Count Tracker */
+        const newCounterValue = globalCounter + 1;
+
+        /* Count-Based Event Controller */
         if(newCounterValue === 10) {
             dispatch(openDialogueBox({ type: 'THRESHOLD_10' }));
         } else if (newCounterValue === 20) {
