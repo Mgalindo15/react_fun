@@ -1,4 +1,10 @@
+/* noto-serif */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap");
+/* .rubik-glitch-regular */
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap");
+/* dotgothic16-regular */
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&family=Rubik+Glitch&display=swap");
+
 
 @tailwind base;
 @tailwind components;

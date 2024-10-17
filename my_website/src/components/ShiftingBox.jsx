@@ -1,24 +1,37 @@
 /*Shifting Modal*/
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../reducers/modal/modalSlice';
 import { incrementCounter, setModalOpened } from '../reducers/counter/counterSlice';
+import { setPosition } from '../reducers/box/boxSlice';
+import { openDialogueBox } from '../reducers/dialogue/dialogueSlice';
 
 const ShiftingBox = () => {
-    const [xPos, setXPos] = useState(50);
-    const [yPos, setYPos] = useState(50);
-
     const dispatch = useDispatch();
     const modalOpened = useSelector((state) => state.counter.modalOpened);
+    const xPos = useSelector((state) => state.box.xPos);
+    const yPos = useSelector((state) => state.box.yPos);
+    const globalCounter = useSelector((state) => state.counter.value);
 
     const handleHover = () => {
-        let randX = Math.random() * 100;
-        let randY = Math.random() * 100;
-        setXPos(randX);
-        setYPos(randY);
+        /* ShiftingBox Controller */
+        const randX = Math.random() * 100;
+        const randY = Math.random() * 100;
+
+        dispatch(setPosition({ xPos: randX, yPos: randY }));
+
+        /* Increment counter before dispatch to ensure count integrity */
+        const newCounterValue = globalCounter + 1;
 
         dispatch(incrementCounter());
 
+        /* Dialogue Controller */
+        if(newCounterValue === 10) {
+            dispatch(openDialogueBox({ type: 'THRESHOLD_10' }));
+        } else if (newCounterValue === 20) {
+            dispatch(openDialogueBox({ type: 'THRESHOLD_20'}));
+        }
+        
+        /* Modal Controller */
         if (!modalOpened) {
             dispatch(openModal({ type: 'COUNTER_MODAL' }));
             dispatch(setModalOpened(true));
