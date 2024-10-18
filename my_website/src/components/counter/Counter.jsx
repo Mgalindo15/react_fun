@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { closeModal } from '../../reducers/modal/modalSlice';
 import { resetCounter, setModalOpened } from '../../reducers/counter/counterSlice';
-import { resetPosition } from '../../reducers/box/boxSlice';
+import { resetPosition } from '../../reducers/box/shiftingBoxSlice';
 
 const CounterModal = () => {
     const counter = useSelector((state) => state.counter.value);

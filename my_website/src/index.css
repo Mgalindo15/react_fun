@@ -1,11 +1,38 @@
-/* noto-serif */
+/* ------------Google Font Imports------------ */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap");
-/* .rubik-glitch-regular */
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap");
-/* dotgothic16-regular */
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&family=Rubik+Glitch&display=swap");
 
 
+/* ------------Tailwind Component Imports------------ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* --------------Custom Styles-------------- */
+
+/* ----CEvent Controllers---- */
+
+/* Dialogue */
+.dialogue-container {
+    pointer-events: none;
+}
+
+/*----DOM Container Management---- */
+
+#root {
+    z-index: 0;
+}
+
+#portal-root-shiftingbox {
+    z-index: 5;
+}
+
+#portal-root-dialogue {
+    z-index: 5;
+}
+
+#portal-root-modal {
+    z-index: 5;
+}

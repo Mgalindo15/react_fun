@@ -1,8 +1,9 @@
 /*Shifting Modal*/
+import reactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../reducers/modal/modalSlice';
 import { incrementCounter, setModalOpened } from '../reducers/counter/counterSlice';
-import { setPosition } from '../reducers/box/boxSlice';
+import { setPosition } from '../reducers/box/shiftingBoxSlice';
 import { openDialogueBox } from '../reducers/dialogue/dialogueSlice';
 
 const ShiftingBox = () => {
@@ -37,7 +38,7 @@ const ShiftingBox = () => {
         }
     };
 
-    return (
+    const shiftingBoxElement = (
             <div
             className="w-25 h-40 p-12 border border-black flex justify-center items-center 
             font-noto font-bold text-lg absolute"
@@ -55,6 +56,8 @@ const ShiftingBox = () => {
                 Catch Me
             </div>
     )
+
+    return reactDOM.createPortal(shiftingBoxElement, document.getElementById('portal-root-shiftingbox'));
 };
 
 export default ShiftingBox;

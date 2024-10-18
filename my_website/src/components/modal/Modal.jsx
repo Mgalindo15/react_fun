@@ -1,3 +1,4 @@
+import reactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import CounterModal from '../counter/Counter';
 
@@ -15,11 +16,13 @@ const Modal = () => {
             return null;
     }
 
-    return (
+    const modalElement = (
         <div>
             {component}
         </div>
     );
+
+    return reactDOM.createPortal(modalElement, document.getElementById('portal-root-modal'));
 };
 
 export default Modal;
