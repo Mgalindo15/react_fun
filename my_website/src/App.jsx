@@ -1,13 +1,23 @@
-import ShiftingBox from './components/ShiftingBox';
-import Modal from './components/modal/Modal';
-import Dialogue from './components/dialogue/Dialogue';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addComponent } from './reducers/universalSwitchSlice';
+import UniversalSwitch from './components/UniversalSwitch';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      addComponent({
+        type: 'SHIFTING_BOX', 
+        portalRoot: 'portal-root-shiftingbox',
+      })
+    );
+  }, [dispatch]);
+
   return (
     <main>
-      <Modal />
-      <ShiftingBox />
-      <Dialogue />
+      <UniversalSwitch />
     </main>
   )
 }

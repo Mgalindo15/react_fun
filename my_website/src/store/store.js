@@ -4,17 +4,15 @@ sets up Redux DevTools and catches accidental mutations,
 composes middleware and DevTools enhancers together and adds to store */
 
 import {configureStore } from '@reduxjs/toolkit';
-import modalReducer from '../reducers/modal/modalSlice';
 import counterReducer from '../reducers/counter/counterSlice';
 import shiftingBoxReducer from '../reducers/box/shiftingBoxSlice';
-import dialogueReducer from '../reducers/dialogue/dialogueSlice';
+import universalSwitchReducer from '../reducers/universalSwitchSlice';
 
 export const store = configureStore ({
     reducer: {
-        modal: modalReducer,
         counter: counterReducer,
         box: shiftingBoxReducer,
-        dialogue: dialogueReducer,
+        universalSwitch: universalSwitchReducer,
     },
 });
 

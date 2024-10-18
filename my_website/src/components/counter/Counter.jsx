@@ -1,16 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { closeModal } from '../../reducers/modal/modalSlice';
-import { resetCounter, setModalOpened } from '../../reducers/counter/counterSlice';
+import { removeComponent } from '../../reducers/universalSwitchSlice';
+import { resetCounter } from '../../reducers/counter/counterSlice';
 import { resetPosition } from '../../reducers/box/shiftingBoxSlice';
+import { CounterPropTypes } from '../../utils/propTypes';
 
-const CounterModal = () => {
+const Counter = ({ id }) => {
     const counter = useSelector((state) => state.counter.value);
     const dispatch = useDispatch();
 
     const handleClose = () => {
-        dispatch(closeModal());
+        dispatch(removeComponent({ id }));
         dispatch(resetCounter());
-        dispatch(setModalOpened(false));
         dispatch(resetPosition());
     };
 
@@ -18,10 +18,14 @@ const CounterModal = () => {
         <div  className="flex justify-center mt-5 font-noto text-center">
             <div>
                 <h2 className="font-bold text-2xl">Count: {counter}</h2>
-                <button className="background-styles" onClick={handleClose}>Start over</button>
+                <button className="background-styles" onClick={handleClose}>
+                    Start over
+                </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CounterModal;
+Counter.propTypes = CounterPropTypes;
+
+export default Counter;

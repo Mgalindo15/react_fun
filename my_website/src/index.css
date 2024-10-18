@@ -29,10 +29,11 @@
     z-index: 5;
 }
 
+#portal-root-counter {
+    z-index: 5;
+}
+
 #portal-root-dialogue {
     z-index: 5;
 }
 
-#portal-root-modal {
-    z-index: 5;
-}

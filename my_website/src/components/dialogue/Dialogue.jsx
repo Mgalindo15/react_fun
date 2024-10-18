@@ -1,22 +1,15 @@
-import reactDOM from 'react-dom';
-import { useSelector } from 'react-redux';
 import DialogueItem from './DialogueItem';
+import { DialoguePropTypes } from '../../utils/propTypes';
 import '../../index.css';
 
-const Dialogue = () => {
-  const dialogues = useSelector((state) => state.dialogue);
-
-  if (dialogues.length === 0) return null;
-
-  const dialogueElement = (
+const Dialogue = ({ id, message }) => {
+  return (
     <div className="dialogue-container">
-      {dialogues.map((dialogue) => (
-        <DialogueItem key={dialogue.id} dialogue={dialogue} />
-      ))}
+      <DialogueItem id={id} message={message} />
     </div>
   );
-
-  return reactDOM.createPortal(dialogueElement, document.getElementById('portal-root-dialogue'));
 };
+
+Dialogue.propTypes = DialoguePropTypes;
 
 export default Dialogue;

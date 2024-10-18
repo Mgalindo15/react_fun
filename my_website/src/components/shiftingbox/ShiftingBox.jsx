@@ -1,17 +1,17 @@
 /*Shifting Modal*/
-import reactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../reducers/modal/modalSlice';
-import { incrementCounter, setModalOpened } from '../reducers/counter/counterSlice';
-import { setPosition } from '../reducers/box/shiftingBoxSlice';
-import { openDialogueBox } from '../reducers/dialogue/dialogueSlice';
+import { addComponent } from '../../reducers/universalSwitchSlice';
+import { incrementCounter } from '../../reducers/counter/counterSlice';
+import { setPosition } from '../../reducers/box/shiftingBoxSlice';
 
 const ShiftingBox = () => {
     const dispatch = useDispatch();
-    const modalOpened = useSelector((state) => state.counter.modalOpened);
     const xPos = useSelector((state) => state.box.xPos);
     const yPos = useSelector((state) => state.box.yPos);
     const globalCounter = useSelector((state) => state.counter.value);
+    const isCounterActive = useSelector((state) =>
+        state.universalSwitch.some((component) => component.type === 'COUNTER')
+    );
 
     const handleHover = () => {
         /* ShiftingBox Controller */
@@ -24,21 +24,34 @@ const ShiftingBox = () => {
         /* Count Tracker */
         const newCounterValue = globalCounter + 1;
 
-        /* Count-Based Event Controller */
+        /* Count-Based Event Controller*/
         if(newCounterValue === 10) {
-            dispatch(openDialogueBox({ type: 'THRESHOLD_10' }));
+            dispatch(
+                addComponent({ 
+                    type: 'DIALOGUE', 
+                    portalRoot: 'portal-root-dialogue',
+                    props: {message: 'feeling tired?'}
+                })
+            );
         } else if (newCounterValue === 20) {
-            dispatch(openDialogueBox({ type: 'THRESHOLD_20'}));
+            dispatch(
+                addComponent({ 
+                    type: 'DIALOGUE', 
+                    portalRoot: 'portal-root-dialogue',
+                    props: { message: 'ready to quit?'}
+                })
+            );
         }
         
-        /* Modal Controller */
-        if (!modalOpened) {
-            dispatch(openModal({ type: 'COUNTER_MODAL' }));
-            dispatch(setModalOpened(true));
+        /* Counter Controller */
+        if (!isCounterActive) {
+            dispatch(
+                addComponent({ type: 'COUNTER', portalRoot: 'portal-root-counter' })
+            );
         }
     };
 
-    const shiftingBoxElement = (
+    return (
             <div
             className="w-25 h-40 p-12 border border-black flex justify-center items-center 
             font-noto font-bold text-lg absolute"
@@ -56,8 +69,6 @@ const ShiftingBox = () => {
                 Catch Me
             </div>
     )
-
-    return reactDOM.createPortal(shiftingBoxElement, document.getElementById('portal-root-shiftingbox'));
 };
 
 export default ShiftingBox;
