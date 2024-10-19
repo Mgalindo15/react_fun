@@ -38,9 +38,9 @@ export function setInitialGlidePointer() {
 
     switch(intIndex) {
         case 0:
-            return Math.random() * (0.2)
+            return Math.random() * (0.3)
         case 1:
-            return Math.random() * (-0.2)
+            return Math.random() * (-0.3)
         default:
             return null;
     }
@@ -55,8 +55,11 @@ export function getUpperBound(viewHeight, boxHeight) {
     return upperBound;
 }
 
-export function geLowerBound(viewHeight, upperBound) {
-    return viewHeight - upperBound;
+export function getLowerBound(viewHeight, boxHeight) {
+    const boxHalfSize = boxHeight / 2;
+    const lowerBound = 100 - ((boxHalfSize / viewHeight) * 100)
+    
+    return lowerBound;
 }
 
 export function getLeftBound(viewWidth, boxWidth) {
@@ -66,12 +69,11 @@ export function getLeftBound(viewWidth, boxWidth) {
     return leftBound;
 }
 
-export function getRightBound(viewWidth, leftBound) {
-    return viewWidth - leftBound;
+export function getRightBound(viewWidth, boxWidth) {
+    const boxHalfSize = boxWidth / 2;
+    const rightBound = 100 - ((boxHalfSize / viewWidth) * 100)
+
+    return rightBound;
 }
-
-/* Collision Mechanics */
-
-
 
 

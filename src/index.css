@@ -43,6 +43,7 @@
 .shifting-box {
     width: auto;
     aspect-ratio: 1 / 1;
+    transition: top 0.025s linear, left 0.025s cubic-bezier(0, .8, 0, .2);
 }
 
 .textShadow {

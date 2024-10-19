@@ -3,8 +3,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComponent } from '../../reducers/universalSwitchSlice';
 import { incrementCounter } from '../../reducers/counter/counterSlice';
-import { setPosition, setGlide } from '../../reducers/box/shiftingBoxSlice';
-import { getPositionInBoundary, getElementWidth, setInitialGlidePointer} from '../../utils/gameCalc';
+import { setPosition, setGlide, setPointers, } from '../../reducers/box/shiftingBoxSlice';
+import { getPositionInBoundary, getElementWidth, setInitialGlidePointer,
+            getUpperBound, getLowerBound, getRightBound, getLeftBound } from '../../utils/gameCalc';
 import '../../index.css';
 
 const ShiftingBox = () => {
@@ -14,14 +15,14 @@ const ShiftingBox = () => {
 
     /* State & Ref Trackers */
     const [shiftingBoxWidth, setShiftingBoxWidth] = useState(0);
-    const [xPointer, setXPointer] = useState(0);
-    const [yPointer, setYPointer] = useState(0);
     const glideIntervalRef = useRef(null);
     const dispatch = useDispatch();
 
     /* State Selectors */
     const xPos = useSelector((state) => state.box.xPos);
     const yPos = useSelector((state) => state.box.yPos);
+    const xPointer = useSelector((state) => state.box.xPointer);
+    const yPointer = useSelector((state) => state.box.yPointer);
     const glideOn = useSelector((state) => state.box.glideOn);
     const globalCounter = useSelector((state) => state.counter.value);
     const isCounterActive = useSelector((state) =>
@@ -43,27 +44,42 @@ const ShiftingBox = () => {
             clearInterval(glideIntervalRef.current);
         }
 
-        /* Update x/y pos in linear direction per interval */
+        /* Update X, Y Positions in Linear Direction Per Interval */
         glideIntervalRef.current = setInterval(() => {
             const newXPos = xPos + xPointer;
             const newYPos = yPos + yPointer;
 
-            console.log(newXPos);
-            console.log(newYPos);
-            
+            /* Get Viewport Boundaries */
+            const upperBound = getUpperBound(viewportHeight, shiftingBoxWidth);
+            const lowerBound = getLowerBound(viewportHeight,shiftingBoxWidth);
+            const leftBound = getLeftBound(viewportWidth, shiftingBoxWidth);
+            const rightBound = getRightBound(viewportWidth, shiftingBoxWidth);
+
+            /* Detect and Handle Collisions */
+            if (newXPos >= rightBound || newXPos <= leftBound) {
+                dispatch(setPointers({ xPointer: xPointer * -1, yPointer }));
+            }
+    
+            if (newYPos >= lowerBound || newYPos <= upperBound) {
+                dispatch(setPointers({ xPointer, yPointer: yPointer * -1 }));
+            }   
+               
             dispatch(setPosition({ xPos: newXPos, yPos: newYPos }));
-        }, 100);
+        }, 10);
 
         /* Clear Interval Before Escape */
         return () => clearInterval(glideIntervalRef.current);
-    }, [glideOn, xPointer, yPointer, xPos, yPos, dispatch]);
+    }, [glideOn, xPointer, yPointer, xPos, yPos, dispatch, viewportWidth, viewportHeight, shiftingBoxWidth]);
 
 
     /* On Hover Event */
     const handleHover = () => {
-        /* Set New Glide Pointers */
-        setXPointer(setInitialGlidePointer());
-        setYPointer(setInitialGlidePointer());
+        /* Set Initial Glide Pointers */
+        const initialXPointer = setInitialGlidePointer();
+        const initialYPointer = setInitialGlidePointer();
+
+        dispatch(setPointers({ xPointer: initialXPointer, yPointer: initialYPointer}))
+
 
         /* Calculate & Set ShiftingBox Position */
         const randX = getPositionInBoundary(viewportWidth, shiftingBoxWidth);

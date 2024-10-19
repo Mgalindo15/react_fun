@@ -23,13 +23,13 @@ const shiftingBoxSlice = createSlice({
     setGlide: (state, action) => {
       state.glideOn = action.payload;
     },
-    setGlidePointer: (state, action) => {
+    setPointers: (state, action) => {
       state.xPointer = action.payload.xPointer;
       state.yPointer = action.payload.yPointer;
-    }
+    },
   },
 });
 
-export const { setPosition, resetPosition, setGlide } = shiftingBoxSlice.actions;
+export const { setPosition, resetPosition, setGlide, setPointers } = shiftingBoxSlice.actions;
 
 export default shiftingBoxSlice.reducer;
