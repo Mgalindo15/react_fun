@@ -12,7 +12,7 @@
 
 /* --------------Custom Styles-------------- */
 
-/* ----CEvent Controllers---- */
+/* ----Event Controllers---- */
 
 /* Dialogue */
 .dialogue-container {
@@ -37,3 +37,10 @@
     z-index: 5;
 }
 
+
+/*----Static Styles---- */
+
+.shifting-box {
+    width: 10vw;
+    aspect-ratio: 1 / 1;
+}

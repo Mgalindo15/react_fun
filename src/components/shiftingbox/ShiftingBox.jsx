@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addComponent } from '../../reducers/universalSwitchSlice';
 import { incrementCounter } from '../../reducers/counter/counterSlice';
 import { setPosition } from '../../reducers/box/shiftingBoxSlice';
+import { getWidthInBoundary, getHeightInBoundary} from '../../utils/gameCalc';
+import '../../index.css';
 
 const ShiftingBox = () => {
     const dispatch = useDispatch();
@@ -15,8 +17,8 @@ const ShiftingBox = () => {
 
     const handleHover = () => {
         /* ShiftingBox Controller */
-        const randX = Math.random() * 100;
-        const randY = Math.random() * 100;
+        const randX = getWidthInBoundary();
+        const randY = getHeightInBoundary();
 
         dispatch(setPosition({ xPos: randX, yPos: randY }));
         dispatch(incrementCounter());
@@ -25,7 +27,7 @@ const ShiftingBox = () => {
         const newCounterValue = globalCounter + 1;
 
         /* Count-Based Event Controller*/
-        if(newCounterValue === 10) {
+        if(newCounterValue === 9) {
             dispatch(
                 addComponent({ 
                     type: 'DIALOGUE', 
@@ -33,7 +35,7 @@ const ShiftingBox = () => {
                     props: {message: 'feeling tired?'}
                 })
             );
-        } else if (newCounterValue === 20) {
+        } else if (newCounterValue === 18) {
             dispatch(
                 addComponent({ 
                     type: 'DIALOGUE', 
@@ -53,12 +55,12 @@ const ShiftingBox = () => {
 
     return (
             <div
-            className="w-25 h-40 p-12 border border-black flex justify-center items-center 
-            font-noto font-bold text-lg absolute"
+            className="p-12 border border-black flex justify-center items-center 
+            font-noto font-bold text-lg fixed shifting-box"
             onMouseEnter={handleHover} 
             style={{ 
-                top: `${yPos}%`,
-                left: `${xPos}%`,
+                top: `${yPos}vh`,
+                left: `${xPos}vw`,
                 transform: 'translate(-50%, -50%)',
                 backgroundImage: 'linear-gradient(45deg, #4d4d4d, #899196, #e0e0e0)',
                 backgroundColor: '#899196',
