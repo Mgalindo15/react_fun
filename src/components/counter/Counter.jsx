@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { removeComponent } from '../../reducers/universalSwitchSlice';
 import { resetCounter } from '../../reducers/counter/counterSlice';
-import { resetPosition } from '../../reducers/box/shiftingBoxSlice';
+import { resetPosition, setGlide } from '../../reducers/box/shiftingBoxSlice';
 import { CounterPropTypes } from '../../utils/propTypes';
 import '../../index.css';
 
@@ -13,6 +13,7 @@ const Counter = ({ id }) => {
         dispatch(removeComponent({ id }));
         dispatch(resetCounter());
         dispatch(resetPosition());
+        dispatch(setGlide(false));
     };
 
     return (

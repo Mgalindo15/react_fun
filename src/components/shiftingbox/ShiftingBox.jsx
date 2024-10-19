@@ -1,29 +1,79 @@
 /*Shifting Modal*/
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComponent } from '../../reducers/universalSwitchSlice';
 import { incrementCounter } from '../../reducers/counter/counterSlice';
-import { setPosition } from '../../reducers/box/shiftingBoxSlice';
-import { getWidthInBoundary, getHeightInBoundary} from '../../utils/gameCalc';
+import { setPosition, setGlide } from '../../reducers/box/shiftingBoxSlice';
+import { getPositionInBoundary, getElementWidth, setInitialGlidePointer} from '../../utils/gameCalc';
 import '../../index.css';
 
 const ShiftingBox = () => {
+    /* Static Vars */
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    /* State & Ref Trackers */
+    const [shiftingBoxWidth, setShiftingBoxWidth] = useState(0);
+    const [xPointer, setXPointer] = useState(0);
+    const [yPointer, setYPointer] = useState(0);
+    const glideIntervalRef = useRef(null);
     const dispatch = useDispatch();
+
+    /* State Selectors */
     const xPos = useSelector((state) => state.box.xPos);
     const yPos = useSelector((state) => state.box.yPos);
+    const glideOn = useSelector((state) => state.box.glideOn);
     const globalCounter = useSelector((state) => state.counter.value);
     const isCounterActive = useSelector((state) =>
         state.universalSwitch.some((component) => component.type === 'COUNTER')
     );
 
+    /* Calculate Width After Mount */
+    useEffect(() => {
+        const width = getElementWidth('.shifting-box');
+        setShiftingBoxWidth(width);
+    }, []);
+
+    /* Glide Functionality */
+    useEffect(() => {
+        if (!glideOn) return;
+
+        //Clear Existing Interval */
+        if(glideIntervalRef.current) {
+            clearInterval(glideIntervalRef.current);
+        }
+
+        /* Update x/y pos in linear direction per interval */
+        glideIntervalRef.current = setInterval(() => {
+            const newXPos = xPos + xPointer;
+            const newYPos = yPos + yPointer;
+
+            console.log(newXPos);
+            console.log(newYPos);
+            
+            dispatch(setPosition({ xPos: newXPos, yPos: newYPos }));
+        }, 100);
+
+        /* Clear Interval Before Escape */
+        return () => clearInterval(glideIntervalRef.current);
+    }, [glideOn, xPointer, yPointer, xPos, yPos, dispatch]);
+
+
+    /* On Hover Event */
     const handleHover = () => {
-        /* ShiftingBox Controller */
-        const randX = getWidthInBoundary();
-        const randY = getHeightInBoundary();
+        /* Set New Glide Pointers */
+        setXPointer(setInitialGlidePointer());
+        setYPointer(setInitialGlidePointer());
+
+        /* Calculate & Set ShiftingBox Position */
+        const randX = getPositionInBoundary(viewportWidth, shiftingBoxWidth);
+        const randY = getPositionInBoundary(viewportHeight, shiftingBoxWidth);
 
         dispatch(setPosition({ xPos: randX, yPos: randY }));
-        dispatch(incrementCounter());
+        dispatch(setGlide(true));
 
         /* Count Tracker */
+        dispatch(incrementCounter());
         const newCounterValue = globalCounter + 1;
 
         /* Count-Based Event Controller*/
