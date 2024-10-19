@@ -3,6 +3,7 @@ import { removeComponent } from '../../reducers/universalSwitchSlice';
 import { resetCounter } from '../../reducers/counter/counterSlice';
 import { resetPosition } from '../../reducers/box/shiftingBoxSlice';
 import { CounterPropTypes } from '../../utils/propTypes';
+import '../../index.css';
 
 const Counter = ({ id }) => {
     const counter = useSelector((state) => state.counter.value);
@@ -17,8 +18,8 @@ const Counter = ({ id }) => {
     return (
         <div  className="flex justify-center mt-5 font-noto text-center">
             <div>
-                <h2 className="font-bold text-2xl">Count: {counter}</h2>
-                <button className="background-styles" onClick={handleClose}>
+                <h2 className="font-bold text-2xl textShadow">Count: {counter}</h2>
+                <button className="textShadow" onClick={handleClose}>
                     Start over
                 </button>
             </div>

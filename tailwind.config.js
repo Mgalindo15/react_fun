@@ -4,6 +4,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
+  plugins: [
+    '@tailwindcss/typography'
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -36,6 +39,5 @@ export default {
       }
     },
   },
-  plugins: [],
 }
 

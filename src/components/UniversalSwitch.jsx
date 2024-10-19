@@ -5,7 +5,7 @@ import ShiftingBox from '../components/shiftingbox/ShiftingBox';
 import Dialogue from '../components/dialogue/Dialogue';
 
 
-/* Map Type to Component */
+/* Map  */
 const componentMapping = {
     COUNTER: Counter,
     SHIFTING_BOX: ShiftingBox,

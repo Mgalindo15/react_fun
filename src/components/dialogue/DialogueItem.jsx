@@ -14,8 +14,6 @@ const DialogueItem = ({ id, message }) => {
     return () => clearTimeout(timer);
   }, [id, dispatch]);
 
-
-
   return (
     <div className='fixed inset-0 flex items-center justify-center'>
       <div className="font-dotgothic text-3xl animate-move-down">
