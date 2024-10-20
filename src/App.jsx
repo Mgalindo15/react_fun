@@ -6,11 +6,19 @@ import UniversalSwitch from './components/UniversalSwitch';
 function App() {
   const dispatch = useDispatch();
 
+  /* Mount and Render Initial Components */
   useEffect(() => {
     dispatch(
       addComponent({
-        type: 'SHIFTING_BOX', 
+        type: 'SHIFTING_BOX',
         portalRoot: 'portal-root-shiftingbox',
+      })
+    );
+  
+    dispatch(
+      addComponent({
+        type: 'GOAL_STRIP',
+        portalRoot: 'portal-root-goalstrip',
       })
     );
   }, [dispatch]);

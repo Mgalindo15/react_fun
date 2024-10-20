@@ -53,7 +53,7 @@ const ShiftingBox = () => {
             const upperBound = getUpperBound(viewportHeight, shiftingBoxWidth);
             const lowerBound = getLowerBound(viewportHeight,shiftingBoxWidth);
             const leftBound = getLeftBound(viewportWidth, shiftingBoxWidth);
-            const rightBound = getRightBound(viewportWidth, shiftingBoxWidth);
+            const rightBound = getRightBound(viewportWidth, shiftingBoxWidth) + 50;
 
             /* Detect and Handle Collisions */
             if (newXPos >= rightBound || newXPos <= leftBound) {

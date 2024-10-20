@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Counter from '../components/counter/Counter';
 import ShiftingBox from '../components/shiftingbox/ShiftingBox';
 import Dialogue from '../components/dialogue/Dialogue';
+import GoalStrip from '../components/game/game_mats';
 
 
 /* Map  */
@@ -10,6 +11,7 @@ const componentMapping = {
     COUNTER: Counter,
     SHIFTING_BOX: ShiftingBox,
     DIALOGUE: Dialogue,
+    GOAL_STRIP: GoalStrip,
 };
 
 const UniversalSwitch = () => {

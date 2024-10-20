@@ -19,7 +19,7 @@ const Counter = ({ id }) => {
     return (
         <div  className="flex justify-center mt-5 font-noto text-center">
             <div>
-                <h2 className="font-bold text-2xl textShadow">Count: {counter}</h2>
+                <h2 className="font-bold text-2xl textShadow">Points: {counter}</h2>
                 <button className="textShadow" onClick={handleClose}>
                     Start over
                 </button>

@@ -12,12 +12,15 @@
 
 /* --------------Custom Styles-------------- */
 
+/* Headline Styles */
+
+
 /* ----Event Controllers---- */
 
-/* Dialogue */
 .dialogue-container {
     pointer-events: none;
 }
+
 
 /*----DOM Container Management---- */
 
@@ -37,6 +40,9 @@
     z-index: 5;
 }
 
+#portal-root-goalstrip {
+    z-index: 5;
+}
 
 /*----Static Styles---- */
 
