@@ -14,13 +14,6 @@ function App() {
         portalRoot: 'portal-root-shiftingbox',
       })
     );
-  
-    dispatch(
-      addComponent({
-        type: 'GOAL_STRIP',
-        portalRoot: 'portal-root-goalstrip',
-      })
-    );
   }, [dispatch]);
 
   return (

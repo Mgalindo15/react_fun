@@ -21,6 +21,10 @@
     pointer-events: none;
 }
 
+.goalstrip-container {
+    pointer-events: none;
+}
+
 
 /*----DOM Container Management---- */
 
@@ -45,6 +49,10 @@
 }
 
 /*----Static Styles---- */
+
+.shifting-box-container {
+    box-sizing: border-box;
+}
 
 .shifting-box {
     width: auto;

@@ -1,4 +1,4 @@
-import DialogueItem from './DialogueItem';
+import DialogueItem from './Dialogue_Item';
 import { DialoguePropTypes } from '../../utils/propTypes';
 import '../../index.css';
 

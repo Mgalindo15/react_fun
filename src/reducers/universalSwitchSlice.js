@@ -18,9 +18,13 @@ const universalSwitchSlice = createSlice({
         removeComponent: (state, action) => {
             return state.filter(component => component.id !== action.payload.id);
         },
+        removeComponentsByType: (state, action) => {
+            const typeToRemove = action.payload.type;
+            return state.filter(component => component.type !== typeToRemove);
+        }
     },
 });
 
-export const { addComponent, removeComponent } = universalSwitchSlice.actions;
+export const { addComponent, removeComponent, removeComponentsByType } = universalSwitchSlice.actions;
 
 export default universalSwitchSlice.reducer;

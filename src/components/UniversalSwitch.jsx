@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
-import Counter from '../components/counter/Counter';
-import ShiftingBox from '../components/shiftingbox/ShiftingBox';
-import Dialogue from '../components/dialogue/Dialogue';
-import GoalStrip from '../components/game/game_mats';
+import Counter from './main/Counter';
+import ShiftingBox from './main/ShiftingBox';
+import Dialogue from './dialogues/Dialogue_Container';
+import GoalStrip from './game/materials';
 
 
-/* Map  */
+/* Map, type: component  */
 const componentMapping = {
     COUNTER: Counter,
     SHIFTING_BOX: ShiftingBox,

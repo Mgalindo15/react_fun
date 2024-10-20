@@ -1,6 +1,6 @@
 /* ------------ ShiftingBox Properties: ------------*/
 
-/* Calculate ShiftingBox Width From Browser */
+/* Calculate ShiftingBox Width In Browser*/
 
 export function getElementWidth(selector) {
     const element = document.querySelector(selector);
@@ -11,7 +11,7 @@ export function getElementWidth(selector) {
     return 0;
 }
 
-/* Calculate ShiftingBox Position */
+/* Calculate ShiftingBox's New Position */
 
 export function getPositionInBoundary(viewSize, boxSize) {
     /* calculate boundary */

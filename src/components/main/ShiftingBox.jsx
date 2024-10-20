@@ -24,7 +24,7 @@ const ShiftingBox = () => {
     const xPointer = useSelector((state) => state.box.xPointer);
     const yPointer = useSelector((state) => state.box.yPointer);
     const glideOn = useSelector((state) => state.box.glideOn);
-    const globalCounter = useSelector((state) => state.counter.value);
+    //const globalCounter = useSelector((state) => state.counter.value);
     const isCounterActive = useSelector((state) =>
         state.universalSwitch.some((component) => component.type === 'COUNTER')
     );
@@ -53,7 +53,7 @@ const ShiftingBox = () => {
             const upperBound = getUpperBound(viewportHeight, shiftingBoxWidth);
             const lowerBound = getLowerBound(viewportHeight,shiftingBoxWidth);
             const leftBound = getLeftBound(viewportWidth, shiftingBoxWidth);
-            const rightBound = getRightBound(viewportWidth, shiftingBoxWidth) + 50;
+            const rightBound = getRightBound(viewportWidth, shiftingBoxWidth);
 
             /* Detect and Handle Collisions */
             if (newXPos >= rightBound || newXPos <= leftBound) {
@@ -88,30 +88,9 @@ const ShiftingBox = () => {
         dispatch(setPosition({ xPos: randX, yPos: randY }));
         dispatch(setGlide(true));
 
-        /* Count Tracker */
-        dispatch(incrementCounter());
-        const newCounterValue = globalCounter + 1;
-
-        /* Count-Based Event Controller*/
-        if(newCounterValue === 9) {
-            dispatch(
-                addComponent({ 
-                    type: 'DIALOGUE', 
-                    portalRoot: 'portal-root-dialogue',
-                    props: {message: 'feeling tired?'}
-                })
-            );
-        } else if (newCounterValue === 18) {
-            dispatch(
-                addComponent({ 
-                    type: 'DIALOGUE', 
-                    portalRoot: 'portal-root-dialogue',
-                    props: { message: 'ready to quit?'}
-                })
-            );
-        }
-        
         /* Counter Controller */
+        dispatch(incrementCounter());
+        
         if (!isCounterActive) {
             dispatch(
                 addComponent({ type: 'COUNTER', portalRoot: 'portal-root-counter' })
@@ -132,6 +111,8 @@ const ShiftingBox = () => {
                 backgroundColor: '#899196',
                 borderRadius: '8px',
                 boxShadow: '1rem 1rem .8rem -.2rem rgba(0, 0, 0, 0.2)',
+                width: shiftingBoxWidth ? `${shiftingBoxWidth}px` : 'auto',
+                flexShrink: 0,
             }}
             >
                 Catch Me

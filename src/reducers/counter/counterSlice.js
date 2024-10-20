@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     value: 0,
+
 };
 
 const counterSlice = createSlice({
@@ -17,5 +18,5 @@ const counterSlice = createSlice({
     },
 });
 
-export const { incrementCounter, resetCounter, setModalOpened } = counterSlice.actions;
+export const { incrementCounter, resetCounter } = counterSlice.actions;
 export default counterSlice.reducer;
