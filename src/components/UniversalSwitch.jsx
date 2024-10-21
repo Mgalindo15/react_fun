@@ -4,6 +4,7 @@ import Counter from './main/Counter';
 import ShiftingBox from './main/ShiftingBox';
 import Dialogue from './dialogues/Dialogue_Container';
 import GoalStrip from './game/materials';
+import StopWatch from './game/widgets';
 
 
 /* Map, type: component  */
@@ -12,6 +13,7 @@ const componentMapping = {
     SHIFTING_BOX: ShiftingBox,
     DIALOGUE: Dialogue,
     GOAL_STRIP: GoalStrip,
+    STOP_WATCH: StopWatch,
 };
 
 const UniversalSwitch = () => {

@@ -28,6 +28,9 @@ const ShiftingBox = () => {
     const isCounterActive = useSelector((state) =>
         state.universalSwitch.some((component) => component.type === 'COUNTER')
     );
+    const isStopWatchActive = useSelector((state) =>
+        state.universalSwitch.some((component) => component.type === 'STOP_WATCH')
+    );
 
     /* Calculate Width After Mount */
     useEffect(() => {
@@ -90,12 +93,21 @@ const ShiftingBox = () => {
 
         /* Counter Controller */
         dispatch(incrementCounter());
+
+        /* Mounting Components For Count === 1 */
         
         if (!isCounterActive) {
             dispatch(
                 addComponent({ type: 'COUNTER', portalRoot: 'portal-root-counter' })
             );
         }
+
+        if(!isStopWatchActive) {
+            dispatch(
+                addComponent({
+                    type: 'STOP_WATCH', portalRoot: 'portal-root-stopwatch'})
+            );    
+        } 
     };
 
     return (
@@ -117,7 +129,7 @@ const ShiftingBox = () => {
             >
                 Catch Me
             </div>
-    )
+    );
 };
 
 export default ShiftingBox;

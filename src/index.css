@@ -25,6 +25,10 @@
     pointer-events: none;
 }
 
+.stopwatch-container {
+    pointer-events: none;
+}
+
 
 /*----DOM Container Management---- */
 
@@ -44,7 +48,7 @@
     z-index: 5;
 }
 
-#portal-root-goalstrip {
+#portal-root-stopwatch {
     z-index: 5;
 }
 

@@ -10,15 +10,16 @@ const Counter = ({ id }) => {
     const counter = useSelector((state) => state.counter.value);
     const dispatch = useDispatch();
 
+    /* Mounting Components For Count > 1 */
+
     useEffect(() => {
 
-        /* Count-Based Event Controller*/
         if(counter === 9) {
             dispatch(
                 addComponent({ 
                     type: 'DIALOGUE', 
                     portalRoot: 'portal-root-dialogue',
-                    props: {message: 'feeling tired?'}
+                    props: {message: 'getting bored?'}
                 })
             );
         } else if (counter === 18) {
@@ -26,10 +27,10 @@ const Counter = ({ id }) => {
                 addComponent({ 
                     type: 'DIALOGUE', 
                     portalRoot: 'portal-root-dialogue',
-                    props: { message: 'ready to quit?'}
+                    props: { message: 'lets play a game'}
                 })
             );
-        } else if (counter === 100) {
+        } else if (counter === 23) {
             dispatch(
                 addComponent({ 
                     type: 'GOAL_STRIP', 
@@ -47,6 +48,7 @@ const Counter = ({ id }) => {
         dispatch(removeComponent({ id }));
         dispatch(removeComponentsByType({ type: 'DIALOGUE' }));
         dispatch(removeComponentsByType({ type: 'GOAL_STRIP' }));
+        dispatch(removeComponentsByType({ type: 'STOP_WATCH' }));
     };
 
     return (
